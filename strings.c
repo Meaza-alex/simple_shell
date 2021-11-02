@@ -8,39 +8,24 @@
  * Return: (Success) to the newly string
  * ------- (Fail) if it failed
  */
-char *_strcat(char *str1, char *str2)
+char *_strcat(char *first, char *second)
 {
-	int len = _strlen(str2) + _strlen(str2);
+	int len1, len2, i = 0, j = 0;
 	char *result;
-	result = malloc((len + 2) * sizeof(char));
-	if (result==NULL)
-		perror("malloc failed\n");
-	char *ptr = result;
 
-	if (str1 != NULL)
-	{
-		while (*str1 != '\0')
-		{
-			*ptr = *str1;
-			ptr++;
-			str1++;
-		}
-	}
-	*ptr = '/';
-	ptr++;
-
-	if (str2 != NULL)
-	{
-		while (*str2!= '\0')
-		{
-			*ptr = *str2;
-			ptr++;
-			str2++;
-		}
-	}
-
-	*ptr = '\0';
-
+	len1 = _strlen(first);
+	len2 = _strlen(second);
+	result = malloc((len1 + len2 + 2) * sizeof(char));
+	if (!result)
+		return (NULL);
+	*result = '\0';
+	while (first[j])
+		result[i++] = first[j++];
+	result[i++] = '/';
+	j = 0;
+	while (second[j])
+		result[i++] = second[j++];
+	result[i] = '\0';
 	return (result);
 }
 /**
