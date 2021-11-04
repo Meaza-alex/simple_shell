@@ -8,40 +8,24 @@
  * Return: (Success) to the newly string
  * ------- (Fail) if it failed
  */
-char *_strcat(char *str1, char *str2)
+char *_strcat(char *first, char *second)
 {
-	int len = _strlen(str2) + _strlen(str2);
+	int len1, len2, i = 0, j = 0;
 	char *result;
-	char *ptr;
-	result = malloc((len + 2) * sizeof(char));
-	if (result==NULL)
-		perror("malloc failed\n");
-	ptr = result;
 
-	if (str1 != NULL)
-	{
-		while (*str1 != '\0')
-		{
-			*ptr = *str1;
-			ptr++;
-			str1++;
-		}
-	}
-	*ptr = '/';
-	ptr++;
-
-	if (str2 != NULL)
-	{
-		while (*str2!= '\0')
-		{
-			*ptr = *str2;
-			ptr++;
-			str2++;
-		}
-	}
-
-	*ptr = '\0';
-
+	len1 = _strlen(first);
+	len2 = _strlen(second);
+	result = malloc((len1 + len2 + 2) * sizeof(char));
+	if (!result)
+		return (NULL);
+	*result = '\0';
+	while (first[j])
+		result[i++] = first[j++];
+	result[i++] = '/';
+	j = 0;
+	while (second[j])
+		result[i++] = second[j++];
+	result[i] = '\0';
 	return (result);
 }
 /**
@@ -53,17 +37,10 @@ char *_strcat(char *str1, char *str2)
  */
 int _strlen(char *str)
 {
-	int len = 0;
+	int len;
 
-	if (str == NULL)
-		return (0);
-
-	while (*str != '\0')
-	{
-		len++;
-		str++;
-	}
-
+	for (len = 0; str[len]; len++)
+		;
 	return (len);
 }
 /**
@@ -129,37 +106,4 @@ char *_strdup(char *str)
 		return (NULL);
 	_strcpy(dupl, str);
 	return (dupl);
-
-}
-/**
- * _strcpy - copie a string from source to destination
- * @source: the string source
- * @dest: the string destination
- *
- * Return: the pointer to dest
- */
-char *_strcpy(char *dest, char *source)
-{
-	int i;
-
-	for (i = 0; source[i] != '\0'; i++)
-	{
-		dest[i] = source[i];
-	}
-	dest[i] = '\0';
-	return (dest);
-}
-/**
- * _isalpha - check if the input is a letter
- * @c: the character to be checked
- *
- * Return: 1 if letter, 0 otherwise
- */
-int _isalpha(int c)
-{
-	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
-	{
-		return (SUCCESS);
-	}
-	return (FAIL);
 }
