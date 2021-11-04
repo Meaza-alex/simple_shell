@@ -12,10 +12,11 @@ char *_strcat(char *str1, char *str2)
 {
 	int len = _strlen(str2) + _strlen(str2);
 	char *result;
+	char *ptr;
 	result = malloc((len + 2) * sizeof(char));
 	if (result==NULL)
 		perror("malloc failed\n");
-	char *ptr = result;
+	ptr = result;
 
 	if (str1 != NULL)
 	{
